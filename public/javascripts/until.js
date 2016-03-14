@@ -1,4 +1,25 @@
 function initData(){
+    $.ajax({
+        method:'post',
+        url: '/api/getData',
+        data: {'collection':'items'}
+    }).done(function(data){
+        setObjectFromLocalStorage('items',data);
+    });
+    $.ajax({
+        method:'post',
+        url: '/api/getData',
+        data: {'collection':'cart'}
+    }).done(function(data){
+        setObjectFromLocalStorage('cart',data);
+    });
+    $.ajax({
+        method:'post',
+        url: '/api/getData',
+        data: {'collection':'receipts'}
+    }).done(function(data){
+        setObjectFromLocalStorage('receipts',data);
+    });
     if (localStorage.cart === undefined) {
         initObjectFromLocalStorage('cart');
     }
@@ -12,6 +33,19 @@ function initData(){
     }
     $("[name='cart-length']").text(getAllCartItemCount(getObjectFromLocalStorage('cart')));
     $("[name='receipt-length']").text(getObjectFromLocalStorage('receipts').length);
+}
+
+function reflashNumber(){
+    $("[name='cart-length']").text(getAllCartItemCount(getObjectFromLocalStorage('cart')));
+    $("[name='receipt-length']").text(getObjectFromLocalStorage('receipts').length);
+}
+
+function setCartLength(callback){
+    $.get('/api/getCart',function(data){
+        if (callback){
+            callback(data);
+        }
+    });
 }
 
 function formatNumber(number) {

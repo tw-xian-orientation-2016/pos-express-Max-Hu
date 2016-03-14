@@ -3,6 +3,14 @@
 //    setObjectFromLocalStorage('cart',updateCart(cartItems,barcode));
 //    return getAllCartItemCount();
 //}
+function getItemList(callback){
+    $.get('/api/getItems',function(data){
+        if (callback){
+            callback(data);
+        }
+    });
+}
+
 
 function updateCart(items,barcode){
     var newItems = [];
@@ -12,7 +20,10 @@ function updateCart(items,barcode){
             existItem.count ++;
             exist = true;
         }
-        newItems.push(existItem);
+        var element = {};
+        element.barcode = existItem.barcode;
+        element.count = existItem.count;
+        newItems.push(element);
     })
     if (!exist) {
         newItems.push(createCartItem(barcode,1));

@@ -1,17 +1,17 @@
 $( document ).ready(function() {
-    initData();
+    reflashNumber();
     var strHtml = loadReceipts(JSON.parse(localStorage.receipts));
     $("tbody").html(strHtml);
     $("[name='receipt-details']").click(function() {
         var id = $(this).data('receiptid');
         localStorage.setItem('temple-receipt',JSON.stringify(findReceiptFromId(id)));
-        window.location.replace("/receipt.html");
+        window.location.replace("/receipt");
     });
     $("[name='home']").click(function() {
         window.location.replace("/");
     });
     $("[name='cart']").click(function() {
-        window.location.replace("/cart.html");
+        window.location.replace("/cart");
     });
 });
 

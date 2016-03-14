@@ -14,6 +14,7 @@ function createCartItem(barcode,count){
 function addToReceipts(receipt,receipts){
     receipts.push(receipt);
     setObjectFromLocalStorage('receipts',receipts)
+    return receipts;
 }
 
 function getReceipt(){
@@ -30,7 +31,7 @@ function getReceipt(){
 function refreshCartPage(){
     var total = getTotal(getCartItems(getObjectFromLocalStorage('cart')));
     $("[name='checkout-total']").text('Check Out : ' + formatNumber(total));
-    initData();
+    //initData();
 }
 
 function updateCartItem(cartItem,cart){

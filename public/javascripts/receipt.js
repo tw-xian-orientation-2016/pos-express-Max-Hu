@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    initData();
+    reflashNumber();
     var receipt = JSON.parse(localStorage.getItem('temple-receipt'));
     $("[name='total-price']").text('Total Price : ' + formatNumber(receipt.total));
     $("#total").text('Total Price : ' + formatNumber(receipt.total));
@@ -9,10 +9,10 @@ $( document ).ready(function() {
         window.location.replace("/");
     });
     $("[name='receipts']").click(function() {
-        window.location.replace("/receiptList.html");
+        window.location.replace("/receiptList");
     });
     $("[name='cart']").click(function() {
-        window.location.replace("/cart.html");
+        window.location.replace("/cart");
     });
 
 });
