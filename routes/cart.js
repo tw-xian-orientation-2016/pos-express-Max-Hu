@@ -1,3 +1,9 @@
-/**
- * Created by zhihu on 16/3/14.
- */
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    res.render('cart', { title: 'ejs' });
+});
+
+module.exports = router;

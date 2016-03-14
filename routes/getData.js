@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 router.post('/', function(req, res) {
     var collection = req.body.collection;
-    db.getAll(collection, function(allItems) {
+    mongodb.getAll(collection, function(allItems) {
         res.send(allItems);
     })
 });

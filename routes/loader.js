@@ -3,39 +3,39 @@ function loadAllItems() {
     {
       barcode: 'ITEM000000',
       name: '可口可乐',
+      price: '3.00',
       unit: '瓶',
-      price: 3.00
     },
     {
       barcode: 'ITEM000001',
       name: '雪碧',
+      price: '3.00',
       unit: '瓶',
-      price: 3.00
     },
     {
       barcode: 'ITEM000002',
       name: '苹果',
+      price: '5.50',
       unit: '斤',
-      price: 5.50
     },
     {
       barcode: 'ITEM000003',
       name: '荔枝',
+      price: '15.00',
       unit: '斤',
-      price: 15.00
     },
     {
       barcode: 'ITEM000004',
       name: '电池',
       unit: '个',
-      price: 2.00
+      price: '2.00',
     },
     {
       barcode: 'ITEM000005',
       name: '方便面',
+      price: '4.50',
       unit: '袋',
-      price: 4.50
-    }
+    },
   ];
 }
 
@@ -57,4 +57,7 @@ function initTestEnv(){
       '"total":5.5,' +
       '"id":1}]')
 }
+
+
+exports.loadItems = loadAllItems;
 
