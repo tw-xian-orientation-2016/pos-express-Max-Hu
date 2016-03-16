@@ -12,15 +12,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/items/', function(req, res, next) {
-    var collection = req.body.collection;
-    mongodb.getAll(collection, function(allItems) {
+    mongodb.getAll('cart', function(allItems) {
         res.send(allItems);
     })
 });
 
 router.post('/items/', function(req, res, next) {
     var cartItems = JSON.parse(req.body.cartItems);
-    mongodb.insertData('cart',cartItems);
+    mongodb.removeData('cart',function(){
+        mongodb.insertData('cart',cartItems);
+    });
     res.send('success');
 });
 
@@ -38,7 +39,6 @@ router.delete('/items/:barcode', function(req, res, next) {
 });
 
 router.delete('/', function(req, res, next) {
-    var barcode = req.params.barcode;
     mongodb.removeData('cart',function(){
         res.send('success');
     });

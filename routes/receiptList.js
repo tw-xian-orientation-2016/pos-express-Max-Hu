@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mongodb = require('./mongodb');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,15 +8,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/receipt/', function(req, res, next) {
-    var collection = req.body.collection;
-    mongodb.getAll(collection, function(allItems) {
+    mongodb.getAll('receipts', function(allItems) {
         res.send(allItems);
     })
 });
 
 router.post('/', function(req, res, next) {
-    var cartItems = JSON.parse(req.body.cartItems);
-    mongodb.insertData('cart',cartItems);
+    var receipt = JSON.parse(req.body.receipt);
+    mongodb.insertData('receipts',receipt);
     res.send('success');
 });
 

@@ -83,16 +83,19 @@ function removeOneData(collection,barcode,insertData){
 }
 
 function updateData(collection,object){
-    var updateRestaurants = function(db, callback) {
-        db.collection(collection).updateOne(object,
-            function(err, results) {
+    var updateData = function(db, callback) {
+        db.collection(collection).updateOne(
+            { "barcode" : object.barcode },
+            {
+                $set: { "count": object.count },
+            },function(err, results) {
                 callback();
             });
     };
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
 
-        updateRestaurants(db, function() {
+        updateData(db, function() {
             db.close();
         });
     });
