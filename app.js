@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var cart = require('./routes/cart');
+var items = require('./routes/items');
 var receiptList = require('./routes/receiptList');
 var receipt = require('./routes/receipt');
 //var db = require('./routes/mongodb');
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/cart',cart);
+app.use('/items',items);
 app.use('/api/getData',getData);
 app.use('/api/addData',addData);
 app.use('/receiptList',receiptList);
