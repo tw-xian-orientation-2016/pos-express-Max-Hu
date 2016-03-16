@@ -67,8 +67,40 @@ function removeData(collection,insertData){
     });
 }
 
+function removeOneData(collection,barcode,insertData){
+    var removeData = function(db) {
+        db.collection(collection).deleteOne(
+            { "barcode": barcode },
+            function(err, results) {
+                insertData();
+            }
+        );
+    };
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        removeData(db);
+    });
+}
+
+function updateData(collection,object){
+    var updateRestaurants = function(db, callback) {
+        db.collection(collection).updateOne(object,
+            function(err, results) {
+                callback();
+            });
+    };
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+
+        updateRestaurants(db, function() {
+            db.close();
+        });
+    });
+}
 
 exports.initDB = initDB;
 exports.getAll = getAll;
 exports.insertData = insertData;
 exports.removeData = removeData;
+exports.updateData = updateData;
+exports.removeOneData = removeOneData;
