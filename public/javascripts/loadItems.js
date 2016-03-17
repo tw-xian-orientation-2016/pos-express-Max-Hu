@@ -18,16 +18,7 @@ $( document ).ready(function() {
         var barcode = $(this).data('itemid');
         var newCart = updateCart(getObjectFromLocalStorage('cart'),barcode);
         setObjectFromLocalStorage('cart',newCart);
-        console.log('####');
-        console.log(newCart);
-        $.ajax({
-            method:'post',
-            url: '/api/addData',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: {'collection':'cart','cartItems':JSON.stringify(newCart)}
-        }).done(function(data){
-            //$("[name='cart-length']").text(data.length);
-        });
+        postCartItem(newCart);
         $("[name='cart-length']").text(getAllCartItemCount(newCart));
     });
 
@@ -39,4 +30,15 @@ $( document ).ready(function() {
     });
 });
 
+
+function postCartItem(newCart){
+    $.ajax({
+        method:'post',
+        url: '/api/addData',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: {'collection':'cart','cartItems':JSON.stringify(newCart)}
+    }).done(function(data){
+        //$("[name='cart-length']").text(data.length);
+    });
+}
 
